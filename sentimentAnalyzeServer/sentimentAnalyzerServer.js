@@ -1,22 +1,22 @@
-const express = require('express');
+import express, { static } from 'express';
 const app = new express();
 
 /*This tells the server to use the client 
 folder for all static resources*/
-app.use(express.static('client'));
+app.use(static('client'));
 
 /*This tells the server to allow cross origin references*/
-const cors_app = require('cors');
+import cors_app from 'cors';
 app.use(cors_app());
 
-const dotenv = require('dotenv');
-dotenv.config();
+import { config } from 'dotenv';
+config();
 
 const api_key = process.env.API_KEY;
 const api_url = process.env.API_URL;
 
-const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
-const { IamAuthenticator } = require('ibm-watson/auth');
+import NaturalLanguageUnderstandingV1 from 'ibm-watson/natural-language-understanding/v1';
+import { IamAuthenticator } from 'ibm-watson/auth';
 
 const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
     version: '2021-08-01',
