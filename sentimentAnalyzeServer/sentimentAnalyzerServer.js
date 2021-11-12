@@ -15,9 +15,10 @@ config();
 const api_key = process.env.API_KEY;
 const api_url = process.env.API_URL;
 
+
 function getNLUInstance() {
     const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
- const { IamAuthenticator } = require('ibm-watson/auth');
+    const { IamAuthenticator } = require('ibm-watson/auth');
  
  const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
    version: '2021-08-01',
