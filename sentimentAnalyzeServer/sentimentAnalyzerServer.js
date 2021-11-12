@@ -1,9 +1,9 @@
-import express, { static } from 'express';
+import express from 'express';
 const app = new express();
 
 /*This tells the server to use the client 
 folder for all static resources*/
-app.use(static('client'));
+app.use(express.static('client'));
 
 /*This tells the server to allow cross origin references*/
 import cors_app from 'cors';
@@ -15,17 +15,19 @@ config();
 const api_key = process.env.API_KEY;
 const api_url = process.env.API_URL;
 
-import NaturalLanguageUnderstandingV1 from 'ibm-watson/natural-language-understanding/v1';
-import { IamAuthenticator } from 'ibm-watson/auth';
-
-const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
-    version: '2021-08-01',
-    authenticator: new IamAuthenticator ({
-        apikey: api_key
-    }),
-    serviceUrl: api_url
-});
-return naturalLanguageUnderstanding;
+function getNLUInstance() {
+    const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
+ const { IamAuthenticator } = require('ibm-watson/auth');
+ 
+ const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
+   version: '2021-08-01',
+   authenticator: new IamAuthenticator({
+     apikey: api_key,
+   }),
+   serviceUrl: api_url,
+ });
+ return naturalLanguageUnderstanding;
+ }
 
 
 //The default endpoint for the webserver
